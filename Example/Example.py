@@ -11,7 +11,7 @@ class BallColor(Enum):
     BLUE = 2
 
 
-class Bunnybot2018:
+class Example:
     def __init__(self):
         self.min_blue_threshold = np.array([90, 0, 0], dtype=np.uint8)
         self.max_blue_threshold = np.array([115, 240, 240], dtype=np.uint8)
