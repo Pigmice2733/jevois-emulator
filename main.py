@@ -1,6 +1,5 @@
 import cv2
 import libjevois
-import Bunnybot2018
 import argparse
 import importlib
 
@@ -49,12 +48,18 @@ def release():
     cv2.destroyAllWindows()
 
 
+def kill():
+    global retval
+    retval = False
+
+
 window_title = "JeVois Emulator"
 
 args = parse_args()
 vision = load_vision_module(args)
 create_window(window_title)
 init_video()
+libjevois._initialize_module(kill)
 
 try:
     while retval:
@@ -64,7 +69,7 @@ try:
 
         if display_output:
             vision.process(inframe, outframe)
-            cv2.imshow(window_title, outframe.image)
+            cv2.imshow(window_title, outframe._retrieve())
         else:
             vision.processNoUSB(inframe)
             cv2.imshow(window_title, frame)
